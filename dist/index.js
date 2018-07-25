@@ -10,7 +10,8 @@ class Block {
     }
 }
 const genesisBlock = new Block(0, "202020202022", "", "Hello", 123456);
-let blockchain = [genesisBlock];
+let blockchain = [genesisBlock, genesisBlock];
+//blockchain은 Block형태를 요소로 하는 배열형태
 // blockchain.push("stuff") //작동되지 않음
 console.log(blockchain);
 //# sourceMappingURL=index.js.map
