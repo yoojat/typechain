@@ -12,7 +12,7 @@ class Block {
 }
 // sayHello = () => "Hello"; // Block이 선언되어야지 사용이 가능
 //static으로 선언해야만 클래스 함수로 이용 가능(선언하지 않아도 이용가능)
-Block.calculateBlockHash = (index, previousHash, timestamp, data) => CryptoJS.SH256(index + previousHash + timestamp + data).toString();
+Block.calculateBlockHash = (index, previousHash, timestamp, data) => CryptoJS.SHA256(index + previousHash + timestamp + data).toString();
 Block.validateStructure = (aBlock) => typeof aBlock.index === "number" &&
     typeof aBlock.hash === "string" &&
     typeof aBlock.previousHash === "string" &&
@@ -31,6 +31,7 @@ const createNewBlock = (data) => {
     const newTimestamp = getNewTimeStamp();
     const newHash = Block.calculateBlockHash(newIndex, previousBlock.hash, newTimestamp, data);
     const newBlock = new Block(newIndex, newHash, previousBlock.hash, data, newTimestamp);
+    addBlock(newBlock);
     return newBlock;
 };
 const getHashforBlock = (aBlock) => Block.calculateBlockHash(aBlock.index, aBlock.previousHash, aBlock.timestamp, aBlock.data);
@@ -56,4 +57,8 @@ const addBlock = (candidateBlock) => {
         blockchain.push(candidateBlock);
     }
 };
+createNewBlock("second block");
+createNewBlock("third block");
+createNewBlock("fourth block");
+console.log(blockchain);
 //# sourceMappingURL=index.js.map

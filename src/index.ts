@@ -10,7 +10,7 @@ class Block {
     timestamp: number,
     data: string
   ): string =>
-    CryptoJS.SH256(index + previousHash + timestamp + data).toString();
+    CryptoJS.SHA256(index + previousHash + timestamp + data).toString();
 
   static validateStructure = (aBlock: Block): boolean =>
     typeof aBlock.index === "number" &&
@@ -70,6 +70,8 @@ const createNewBlock = (data: string): Block => {
     newTimestamp
   );
 
+  addBlock(newBlock);
+
   return newBlock;
 };
 
@@ -101,4 +103,9 @@ const addBlock = (candidateBlock: Block): void => {
   }
 };
 
+createNewBlock("second block");
+createNewBlock("third block");
+createNewBlock("fourth block");
+
+console.log(blockchain);
 export {};
